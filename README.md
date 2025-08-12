@@ -1,16 +1,16 @@
-# Interview Task – Algorithm + Tests
+# Assessment Task – Algorithm + Tests
 
 This small project contains:
 - **`main_functions.py`** – the core algorithm.
 - **`test_main_functions.py`** – a simple test runner with multiple cases, including edge cases (spaces, empty input).
-- **`Task_Questions.txt`** – written answers for the interview questions (unit/integration/system tests, design pattern, multi-thread vs multi-process, Dockerfile).
+- **`Task_Questions.txt`** – written answers for the assessment questions (unit/integration/system tests, design pattern, multi-thread vs multi-process, Dockerfile).
 
 ---
 
 ## 1) Project Structure
 
 ```
-Interview-Tests/
+Assessment-Tests/
 ├── main_functions.py            # algorithm: return characters that appear at least twice
 ├── test_main_functions.py       # prints test outcomes (PASS/FAIL)
 └── Task_Questions.txt           # written answers
@@ -43,7 +43,7 @@ Test 1: Input=['c', 'a', 'i', 'o', 'p', 'a'] → Output=['a'] Expected=['a'] →
 
 ### Option B – Run from Git Bash / Command Prompt
 ```bash
-cd "E:/Github Work Top Secret/Interview-Tests"
+cd "C:/..."
 python test_main_functions.py
 ```
 
@@ -122,4 +122,4 @@ return_characters_appearing_twice(['a',' ','b',' ','c'])
 ## 7) Notes for Reviewers 
 - The algorithm is linear-time with predictable memory usage.
 - Tests include common paths and edge cases (empty, no duplicates, whitespace).  
-- Answers in `Task_Questions.txt` are concise and interview-ready; happy to elaborate with a formal `unittest` suite if needed.
+- Answers in `Task_Questions.txt`, and happy to elaborate later if needed
