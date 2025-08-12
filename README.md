@@ -90,13 +90,13 @@ If you want to switch to the `unittest` framework later, you can wrap the same c
   - *System* → end-to-end as a user/external system would use it.
 
 - **Design Pattern (Strategy) & SRP Connection:**  
-  Strategy organizes interchangeable algorithms into separate classes. In this task, the algorithm and tests are split into separate files, which follows the **Single Responsibility Principle** and keeps code reusable and maintainable.
+  Strategy organises interchangeable algorithms into separate classes. In this task, the algorithm and tests are split into separate files, which follows the **Single Responsibility Principle** and keeps code reusable and maintainable.
 
-- **Multi-Process vs Multi-Thread (plain English):**  
-  Threads share memory (lightweight, great for I/O/waiting work, but can interfere if not synchronized).  
+- **Multi-Process vs Multi-Thread:**  
+  Threads share memory (lightweight, great for I/O/waiting work, but can interfere if not synchronised).  
   Processes are isolated (more memory/overhead, but safer and allow true parallel CPU work).
 
-- **Dockerfile (what it does & caveats):**  
+- **Dockerfile Comments:**  
   Starts from a small Debian image, generates a random token at build time, creates and runs a script to delete it, then prints `done` on container start.  
   Caveats: avoid `latest` (pin versions), and don’t generate secrets during image build (they persist in image layers). Prefer runtime secrets or BuildKit secrets; combine steps to avoid leaving helper files behind.
 
