@@ -1,0 +1,81 @@
+1) Algorithm: list characters appearing at least twice
+-----------------------------------------------
+Language: Python
+
+def at_least_twice(chars: list[str]) -> list[str]:
+    freq = {}
+    for ch in chars:
+        freq[ch] = freq.get(ch, 0) + 1
+    seen = set()
+    result = []
+    for ch in chars:
+        if ch not in seen and freq[ch] >= 2:
+            result.append(ch)
+            seen.add(ch)
+    return result
+
+# Example
+example = ['c','a','i','o','p','a']
+print(at_least_twice(example))  # -> ['a']
+
+Time/space cost:
+- Let n = length of input, k = number of distinct characters.
+- Time: O(n) to count + O(n) to build ordered result = O(n) overall.
+- Space: O(k) for the frequency map (+ O(k) for 'seen').
+
+2) Do you know what a unit test is? And an integration test? What is the difference? What about a system test?
+-----------------------------------------------
+- Unit test - Is a small function, class, or method that is verfied in isolation from compotnents a sytem usually with run with mock dependecies or stubbed.
+- Integration test -  A test run on a componet that to verify it works together with other componments.
+- System test - Conducted to test the whole system for validation of the system as a user or an external systme.
+
+3) Do you know design patterns? Describe one briefly.
+-----------------------------------------------
+I understand the concept of the Strategy Pattern, which organizes interchangeable algorithms into separate classes.
+In the code I developed for this task, I applied the Single Responsibility Principle by placing the algorithm in one
+file and the tests in another. This approach enhances code reusability and makes the test harness adaptable for 
+testing other functions. It aligns with how design patterns promote separation of concerns and reusability.
+
+4) Describe the pros and cons of writing a multi-process vs a multi-thread application
+-----------------------------------------------
+Multi-process applications' pros are that they are better for CPU- and memory-intensive work and for situations where
+you want to avoid one crash taking down the whole application. Each process runs independently, so they are more 
+stable, but their cons are that they’re slower to start, use more memory, and it’s harder to share data between them.
+
+Multi-threaded applications' pros are that they share the same memory, making them lighter and faster for tasks that
+spend a lot of time waiting (like database queries or network requests). The cons are that threads can interfere with
+each other if not managed carefully, which can cause crashes or unpredictable behaviour.
+
+5) Most boring vs most satisfying
+-----------------------------------------------
+The least exciting part of the process is waiting for other teams to finish their work or clarify what needs to be tested,
+as this can slow things down. The most satisfying part is when all the tests pass and the system shows a green status, 
+allowing the team to move forward with confidence. During the waiting period, I often take the opportunity to improve 
+existing tests, refine them, and provide more effective reports.
+
+6) Explain and comment this Dockerfile.
+-----------------------------------------------
+FROM bitnami/minideb:latest
+
+- Starts from a small Debian-based image by Bitnami.
+
+RUN bash -c "echo \"$(< /dev/urandom tr -cd "[:print:]" | head -c 32; echo)\" > /tmp/auth"
+
+- At build time, generates a random 32-character printable string and writes it to /tmp/auth (a temporary “auth” token).
+
+RUN <<EOF cat > /remove
+#!/usr/bin/env bash
+test -f /tmp/auth && rm -f /tmp/auth
+EOF
+
+- Creates a tiny script /remove that deletes /tmp/auth if it exists.
+
+RUN chmod +x /remove; \
+    bash /remove
+    
+- Makes the script executable and runs it, removing /tmp/auth in the current layer. However, the earlier layer still\
+    contains the file in image history, and /remove itself remains in the final image unless later deleted.
+
+CMD ["/usr/bin/echo", "done"]
+
+- default container command prints 'done' and exits.
