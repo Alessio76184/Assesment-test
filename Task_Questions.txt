@@ -31,16 +31,13 @@ Time/space cost:
 
 3) Do you know design patterns? Describe one briefly.
 -----------------------------------------------
-I understand the concept of the Strategy Pattern, which organizes interchangeable algorithms into separate classes.
-In the code I developed for this task, I applied the Single Responsibility Principle by placing the algorithm in one
-file and the tests in another. This approach enhances code reusability and makes the test harness adaptable for 
-testing other functions. It aligns with how design patterns promote separation of concerns and reusability.
+I understand the concept of design patterns, which are proven ways to structure code so it’s easier to maintain and expand. For example, I’m familiar with the Strategy pattern, which encapsulates interchangeable algorithms behind a standard interface so they can be swapped without changing the calling code. In the code I developed for this task, for example, I applied the Single Responsibility Principle by placing the algorithm in one file and the tests in another. This improves reusability and makes the test harness adaptable for other functions, aligning with how design patterns promote separation of concerns.
 
 4) Describe the pros and cons of writing a multi-process vs a multi-thread application
 -----------------------------------------------
-Multi-process applications' pros are that they are better for CPU- and memory-intensive work and for situations where
+Multi-process applications' pros are that they are better for CPU and memory-intensive work and for situations where
 you want to avoid one crash taking down the whole application. Each process runs independently, so they are more 
-stable, but their cons are that they’re slower to start, use more memory, and it’s harder to share data between them.
+stable, but their cons are that they’re slower to start, use more memory, orchestration is far more complex, and it’s harder to share data between them.
 
 Multi-threaded applications' pros are that they share the same memory, making them lighter and faster for tasks that
 spend a lot of time waiting (like database queries or network requests). The cons are that threads can interfere with
@@ -48,10 +45,8 @@ each other if not managed carefully, which can cause crashes or unpredictable be
 
 5) Most boring vs most satisfying
 -----------------------------------------------
-The least exciting part of the process is waiting for other teams to finish their work or clarify what needs to be tested,
-as this can slow things down. The most satisfying part is when all the tests pass and the system shows a green status, 
-allowing the team to move forward with confidence. During the waiting period, I often take the opportunity to improve 
-existing tests, refine them, and provide more effective reports.
+The boring part can be when progress is blocked by waiting for dependencies from other teams, as I am always eager to deliver and see my contribution in action. When that happens, I usually use the time to improve automation scripts, refactor code, research areas where I need to develop, or strengthen our test coverage so we’re ready when dependencies are resolved.
+The most satisfying part is when a complex feature or integration works in production, and seeing all the parts we've worked on functioning reliably and adding real value is incredibly rewarding.
 
 6) Explain and comment this Dockerfile.
 -----------------------------------------------
@@ -68,13 +63,12 @@ RUN <<EOF cat > /remove
 test -f /tmp/auth && rm -f /tmp/auth
 EOF
 
-- Creates a tiny script /remove that deletes /tmp/auth if it exists.
+- It attaches the EOF and cat to /remove, and also should create the file if it has not been created already. It will then run the test /temp/auth and then remove it.
 
 RUN chmod +x /remove; \
     bash /remove
     
-- Makes the script executable and runs it, removing /tmp/auth in the current layer. However, the earlier layer still\
-    contains the file in image history, and /remove itself remains in the final image unless later deleted.
+- Makes the /remove executable and runs it, by placing multiple commands one after the other. The \ is used to place commands one after another
 
 CMD ["/usr/bin/echo", "done"]
 
