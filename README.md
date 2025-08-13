@@ -7,7 +7,14 @@ This small project contains:
 
 ---
 
-## 1) Project Structure
+## 1) Notes for Reviewers 
+- The algorithm is linear-time with predictable memory usage.
+- Tests include common paths and edge cases (empty, no duplicates, whitespace).  
+- Answers in `Task_Questions.txt`, and happy to elaborate later if needed.
+
+---
+
+## 2) Project Structure
 
 ```
 Assessment-Tests/
@@ -18,7 +25,7 @@ Assessment-Tests/
 
 ---
 
-## 2) How to Run (Windows, macOS, Linux)
+## 3) How to Run (Windows, macOS, Linux)
 
 ### Prerequisites
 - Python 3.10+ installed (`python --version` or `python3 --version`)
@@ -51,7 +58,7 @@ python test_main_functions.py
 
 ---
 
-## 3) The Algorithm
+## 4) The Algorithm
 
 **Function:** `return_characters_appearing_twice(chars: list[str]) -> list[str]`
 
@@ -74,7 +81,7 @@ python test_main_functions.py
 
 ---
 
-## 4) How the Tests Work
+## 5) How the Tests Work
 
 In **`test_main_functions.py`**, the test runner defines a list of `(input, expected_output)` pairs, calls the function, and prints `PASS`/`FAIL` for each case. This keeps the tests simple and easy to read in the terminal.
 
@@ -82,7 +89,7 @@ If you want to switch to the `unittest` framework later, you can wrap the same c
 
 ---
 
-## 5) Summary of Written Answers (`Task_Questions.txt`)
+## 6) Summary of Written Answers (`Task_Questions.txt`)
 
 - **Unit vs Integration vs System Tests:**  
   - *Unit* → a small piece (function/class) in isolation, often with mocks.  
@@ -97,12 +104,11 @@ If you want to switch to the `unittest` framework later, you can wrap the same c
   Processes are isolated (more memory/overhead, but safer and allow true parallel CPU work).
 
 - **Dockerfile Comments:**  
-  Starts from a small Debian image, generates a random token at build time, creates and runs a script to delete it, then prints `done` on container start.  
-  Caveats: avoid `latest` (pin versions), and don’t generate secrets during image build (they persist in image layers). Prefer runtime secrets or BuildKit secrets; combine steps to avoid leaving helper files behind.
+   This Dockerfile starts from a minimal Debian image, creates a temporary 32-character auth file, writes a script to remove it, executes the script, and finally runs a container that simply prints “done” before exiting.
 
 ---
 
-## 6) Quick Demo Snippets
+## 7) Quick Demo Snippets
 
 Run a quick call to the function from a Python shell:
 ```python
@@ -117,9 +123,4 @@ return_characters_appearing_twice(['a',' ','b',' ','c'])
 # [' ']
 ```
 
----
 
-## 7) Notes for Reviewers 
-- The algorithm is linear-time with predictable memory usage.
-- Tests include common paths and edge cases (empty, no duplicates, whitespace).  
-- Answers in `Task_Questions.txt`, and happy to elaborate later if needed
